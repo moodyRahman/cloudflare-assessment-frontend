@@ -1,0 +1,11 @@
+{
+  "name": "general",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "http://RB41w2j2m86YfKi3k4JUsWZ1n8q:UV6GtTeW@submissions.apply.cloudflareworkers.com/git/RB41w2j2m86YfKi3k4JUsWZ1n8q/general.git",
+  "author": "Moody Rahman <moody.byte@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@cloudflare/wrangler": "^1.19.3"
+  }
+}
