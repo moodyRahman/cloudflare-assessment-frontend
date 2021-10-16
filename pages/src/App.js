@@ -4,9 +4,15 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import {AccessTokenContext} from "./context/LoginContext"
+
 
 function App() {
+  // store JWT token here, derive username later rather than store it as it's own
+  const [accessToken, setAccessToken] = useState("");
+
   return (
+    <AccessTokenContext.Provider value={{accessToken, setAccessToken}}>
     <Router>
       <div>
 
