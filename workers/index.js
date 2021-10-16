@@ -47,7 +47,9 @@ router.get("/post", async (request) => {
     )
   )
 
-  return new Response(JSON.stringify(out))
+  return new Response(JSON.stringify(out), {headers: {
+    "Content-Type": "application/json"
+  }})
 });
 
 router.get("/error", async (request) => {
