@@ -38,13 +38,13 @@ router.post("/post", async (request) => {
 router.get("/post", async (request) => {
   const allPosts = await POSTS_DATABASE.list();
   
+  // there has to be a better way than this, maybe some way to batch database calls?
+  // if this was running on a server, I could cache the data but it seems like 
+  // having the frontend handle caching seems more feasible
   let out = await Promise.all(
-    allPosts.keys.map(async e => {
-      return {
-        key:e.name,
-        data: await POSTS_DATABASE.get(e.name)
-      }
-    })
+    allPosts.keys.map(async e => 
+      await POSTS_DATABASE.get(e.name, {type:"json"})
+    )
   )
 
   return new Response(JSON.stringify(out))
