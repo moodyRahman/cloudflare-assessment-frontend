@@ -21,10 +21,18 @@ router.post("/post", async request => {
 
   return new Response(returnData, {
     headers: {
-      "Content-Type": "application/json"
-    }
-  })
-})
+
+router.get("/post", async (request) => {
+  const allPosts = await POSTS_DATABASE.list();
+  
+  let out = await Promise.all(
+    allPosts.keys.map(async e => {
+      return await POSTS_DATABASE.get(e.name)
+    })
+  )
+
+  return new Response(out)
+});
 
 router.get("/error", async request => {
   throw 55;
