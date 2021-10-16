@@ -1,4 +1,5 @@
 import { Router } from "itty-router";
+import { nanoid } from 'nanoid'
 
 // Create a new router
 const router = Router();
@@ -16,7 +17,7 @@ router.post("/post", async (request) => {
   // If the POST data is JSON then attach it to our response.
   const data = await request.json();
 
-  await POSTS_DATABASE.put(data.key, data.value);
+  await POSTS_DATABASE.put(nanoid(), data.value);
 
   // Serialise the JSON to a string.
 
