@@ -13,19 +13,26 @@ router.get("/", () => {
   );
 });
 
+/**
+ * The current defacto format for a post is as follows in JSON
+ * be sure to wipe the database if this format is ever changed
+    {
+        "title":string,
+        "body":string,
+        "author":string,
+        "time":int unix timestamp
+    }
+*/
+
 router.post("/post", async (request) => {
   // If the POST data is JSON then attach it to our response.
   const data = await request.json();
-
-  await POSTS_DATABASE.put(nanoid(), data.value);
+  let id = nanoid()
+  await POSTS_DATABASE.put(id, JSON.stringify(data));
 
   // Serialise the JSON to a string.
 
-  return new Response(`inserted ${data.key}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return new Response("success");
 });
 
 router.get("/post", async (request) => {
