@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +7,9 @@ import {
 } from "react-router-dom";
 import {AccessTokenContext} from "./context/LoginContext"
 
+import Feed from './pages/Feed';
+import Login from './pages/Login';
+import SmartReroute from './pages/SmartReroute';
 
 function App() {
   // store JWT token here, derive username later rather than store it as it's own
@@ -15,15 +19,12 @@ function App() {
     <AccessTokenContext.Provider value={{accessToken, setAccessToken}}>
     <Router>
       <div>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            ABOUT
+          <Route path="/login">
+            <Login />
           </Route>
-          <Route path="/users">
-            USSERS
+          <Route path="/feed">
+            <Feed />
           </Route>
           <Route path="/">
             HOME
@@ -31,6 +32,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    </AccessTokenContext.Provider>
   );
 }
 
