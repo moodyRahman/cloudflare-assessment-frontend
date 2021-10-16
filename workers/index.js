@@ -44,21 +44,55 @@ router.post("/post", async (request) => {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
       "Access-Control-Max-Age": "86400",
-    }
+    },
   });
 });
 
 router.get("/post", async (request) => {
-  const allPosts = await POSTS_DATABASE.list();
+  // const allPosts = await POSTS_DATABASE.list();
 
   // there has to be a better way than this, maybe some way to batch database calls?
   // if this was running on a server, I could cache the data but it seems like
   // having the frontend handle caching seems more feasible
-  let out = await Promise.all(
-    allPosts.keys.map(
-      async (e) => await POSTS_DATABASE.get(e.name, { type: "json" })
-    )
-  );
+
+  // let out = await Promise.all(
+  //   allPosts.keys.map(
+  //     async (e) => await POSTS_DATABASE.get(e.name, { type: "json" })
+  //   )
+  // );
+
+  let out = [
+    {
+      title: "hello!",
+      body: "bye!",
+      author: "moody",
+      time: 44444,
+    },
+    {
+      title: "great weather today",
+      body: "it's like 70 degrees, optimal temp",
+      author: "moody",
+      time: 44445,
+    },
+    {
+      title: "my favorite food...",
+      body: "stirfry broccoli!!!!",
+      author: "moody",
+      time: 44446,
+    },
+    {
+      title: "my cat would have said... ",
+      body: "... meow, IF I HAD A CAT",
+      author: "moody",
+      time: 44447,
+    },
+    {
+      title: "funky",
+      body: "fresh",
+      author: "moody",
+      time: 44448,
+    },
+  ];
 
   return new Response(JSON.stringify(out), {
     headers: {
@@ -66,7 +100,7 @@ router.get("/post", async (request) => {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
       "Access-Control-Max-Age": "86400",
-    }
+    },
   });
 });
 
