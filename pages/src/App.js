@@ -26,8 +26,8 @@ function App() {
           <Route path="/feed">
             <Feed />
           </Route>
-          <Route path="/">
-            HOME
+          <Route path='/'>
+            <SmartReroute />
           </Route>
         </Switch>
       </div>
