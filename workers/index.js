@@ -32,11 +32,14 @@ router.get("/post", async (request) => {
   
   let out = await Promise.all(
     allPosts.keys.map(async e => {
-      return await POSTS_DATABASE.get(e.name)
+      return {
+        key:e.name,
+        data: await POSTS_DATABASE.get(e.name)
+      }
     })
   )
 
-  return new Response(out)
+  return new Response(JSON.stringify(out))
 });
 
 router.get("/error", async (request) => {
