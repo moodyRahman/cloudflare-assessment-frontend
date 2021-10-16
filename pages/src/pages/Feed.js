@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useHistory } from "react-router";
+import Post from "../components/Post";
 import { AccessTokenContext } from "../context/LoginContext";
 
 const Feed = () => {
@@ -8,6 +9,7 @@ const Feed = () => {
   const [loading, setLoading] = useState(true);
 	const token = useContext(AccessTokenContext).accessToken;
   let history = useHistory();
+	
 	useEffect(() => {
 		if (token === "")
 		{
@@ -24,7 +26,7 @@ const Feed = () => {
         setLoading(false);
         console.log(data);
       });
-  });
+  }, [token, history]);
 
   if (loading) {
     return <Container>loading screen</Container>;
@@ -33,7 +35,7 @@ const Feed = () => {
   return (
     <Container>
       {posts.map((e) => (
-        <div>{JSON.stringify(e)}</div>
+        <Post data={e}></Post>
       ))}
     </Container>
   );
